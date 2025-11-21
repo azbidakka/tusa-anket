@@ -21,27 +21,27 @@ router.get('/survey/:slug', async (req, res) => {
     const surveyDoc = snapshot.docs[0];
     const survey = { id: surveyDoc.id, ...surveyDoc.data() };
     
-    // IP bazlı kontrol - Bu IP bu anketi daha önce doldurmuş mu?
+    // IP bazlı kontrol - GEÇİCİ OLARAK DEVRE DIŞI
     const clientIp = req.ip || req.connection.remoteAddress;
     console.log('📍 Survey request from IP:', clientIp);
     
-    const responseSnapshot = await db.collection('survey_responses')
-      .where('template_id', '==', surveyDoc.id)
-      .where('ip', '==', clientIp)
-      .get();
+    // const responseSnapshot = await db.collection('survey_responses')
+    //   .where('template_id', '==', surveyDoc.id)
+    //   .where('ip', '==', clientIp)
+    //   .get();
     
-    console.log('📊 Previous responses from this IP:', responseSnapshot.size);
+    // console.log('📊 Previous responses from this IP:', responseSnapshot.size);
     
-    if (!responseSnapshot.empty) {
-      // Daha önce doldurulmuş
-      console.log('⚠️ Survey already submitted by this IP');
-      return res.status(400).json({ 
-        error: 'Bu anketi daha önce doldurdunuz. Teşekkür ederiz!',
-        alreadySubmitted: true 
-      });
-    }
+    // if (!responseSnapshot.empty) {
+    //   // Daha önce doldurulmuş
+    //   console.log('⚠️ Survey already submitted by this IP');
+    //   return res.status(400).json({ 
+    //     error: 'Bu anketi daha önce doldurdunuz. Teşekkür ederiz!',
+    //     alreadySubmitted: true 
+    //   });
+    // }
     
-    console.log('✅ Survey can be displayed');
+    console.log('✅ Survey can be displayed (IP check disabled)');
     
     res.json(survey);
   } catch (error) {
@@ -70,26 +70,26 @@ router.post('/survey/:slug/submit', surveySubmitLimiter, async (req, res) => {
     const surveyDoc = snapshot.docs[0];
     const survey = surveyDoc.data();
     
-    // IP bazlı tekrar gönderim kontrolü
+    // IP bazlı tekrar gönderim kontrolü - GEÇİCİ OLARAK DEVRE DIŞI
     const clientIp = req.ip || req.connection.remoteAddress;
     console.log('📍 Submit request from IP:', clientIp);
     
-    const existingResponse = await db.collection('survey_responses')
-      .where('template_id', '==', surveyDoc.id)
-      .where('ip', '==', clientIp)
-      .get();
+    // const existingResponse = await db.collection('survey_responses')
+    //   .where('template_id', '==', surveyDoc.id)
+    //   .where('ip', '==', clientIp)
+    //   .get();
     
-    console.log('📊 Existing responses:', existingResponse.size);
+    // console.log('📊 Existing responses:', existingResponse.size);
     
-    if (!existingResponse.empty) {
-      console.log('⚠️ Duplicate submission blocked');
-      return res.status(400).json({ 
-        error: 'Bu anketi daha önce doldurdunuz.',
-        alreadySubmitted: true 
-      });
-    }
+    // if (!existingResponse.empty) {
+    //   console.log('⚠️ Duplicate submission blocked');
+    //   return res.status(400).json({ 
+    //     error: 'Bu anketi daha önce doldurdunuz.',
+    //     alreadySubmitted: true 
+    //   });
+    // }
     
-    console.log('✅ Submission allowed');
+    console.log('✅ Submission allowed (IP check disabled)');
     
     const channel = 'Web'; // Token olmadığı için varsayılan kanal
     
