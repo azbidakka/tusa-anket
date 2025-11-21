@@ -1,0 +1,14 @@
+# Deployment'a dahil edilmeyecek dosyalar
+node_modules/
+.git/
+.vscode/
+*.log
+.env.local
+.DS_Store
+frontend/dist/
+backend/node_modules/
+frontend/node_modules/
+test-login.html
+TEST_LOGIN.md
+*.md
+!README.md

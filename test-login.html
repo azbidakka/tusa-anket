@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test</title>
+</head>
+<body>
+    <h1>TUSA Login Test</h1>
+    <button onclick="testLogin()">Test Login</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testLogin() {
+            const resultEl = document.getElementById('result');
+            resultEl.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@tusahastanesi.com',
+                        password: 'TusaAdmin2024!'
+                    })
+                });
+                
+                const data = await response.json();
+                resultEl.textContent = JSON.stringify(data, null, 2);
+                
+                if (data.token) {
+                    resultEl.textContent += '\n\n✅ LOGIN BAŞARILI!';
+                }
+            } catch (error) {
+                resultEl.textContent = '❌ HATA: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
