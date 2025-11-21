@@ -3,6 +3,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../../config/axios';
 import QuestionRenderer from '../../components/QuestionRenderer';
 import { KVKK_AYDINLATMA_METNI } from '../../../../shared/index.js';
+import logoImage from '../../assets/tusa-logo.png';
 
 const SurveyForm = () => {
   const { slug } = useParams();
@@ -23,7 +24,7 @@ const SurveyForm = () => {
     const img = new Image();
     img.onload = () => setLogoExists(true);
     img.onerror = () => setLogoExists(false);
-    img.src = '/src/assets/tusa-logo.png';
+    img.src = logoImage;
   }, []);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const SurveyForm = () => {
         <div className="card max-w-md text-center">
           {logoExists && (
             <img 
-              src="/src/assets/tusa-logo.png" 
+              src={logoImage} 
               alt="TUSA Hastanesi" 
               className="h-16 w-auto mx-auto mb-4"
             />
@@ -192,7 +193,7 @@ const SurveyForm = () => {
         <div className="text-center mb-4 sm:mb-8">
           {logoExists ? (
             <img 
-              src="/src/assets/tusa-logo.png" 
+              src={logoImage} 
               alt="TUSA Hastanesi" 
               className="h-12 sm:h-16 w-auto mx-auto mb-3 sm:mb-4"
             />

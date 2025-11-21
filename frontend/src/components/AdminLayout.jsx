@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import logoImage from '../assets/tusa-logo.png';
 
 const AdminLayout = () => {
   const { user, logout } = useAuth();
@@ -12,7 +13,7 @@ const AdminLayout = () => {
     const img = new Image();
     img.onload = () => setLogoExists(true);
     img.onerror = () => setLogoExists(false);
-    img.src = '/src/assets/tusa-logo.png';
+    img.src = logoImage;
   }, []);
 
   const handleLogout = () => {
@@ -36,7 +37,7 @@ const AdminLayout = () => {
               <div className="flex-shrink-0 flex items-center">
                 {logoExists ? (
                   <img 
-                    src="/src/assets/tusa-logo.png" 
+                    src={logoImage} 
                     alt="TUSA Hastanesi" 
                     className="h-10 w-auto"
                   />

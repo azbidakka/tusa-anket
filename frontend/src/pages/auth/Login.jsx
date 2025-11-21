@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import logoImage from '../../assets/tusa-logo.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
     const img = new Image();
     img.onload = () => setLogoExists(true);
     img.onerror = () => setLogoExists(false);
-    img.src = '/src/assets/tusa-logo.png';
+    img.src = logoImage;
   }, []);
 
   const handleSubmit = async (e) => {
@@ -43,7 +44,7 @@ const Login = () => {
         <div className="text-center mb-8">
           {logoExists ? (
             <img 
-              src="/src/assets/tusa-logo.png" 
+              src={logoImage} 
               alt="TUSA Hastanesi" 
               className="h-20 w-auto mx-auto mb-4"
             />
