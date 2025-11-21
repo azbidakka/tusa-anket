@@ -16,7 +16,6 @@ const SurveyForm = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [logoExists, setLogoExists] = useState(false);
-  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [showKvkkModal, setShowKvkkModal] = useState(false);
 
   useEffect(() => {
@@ -53,9 +52,6 @@ const SurveyForm = () => {
       const errorData = err.response?.data;
       console.log('Error data:', errorData);
       setError(errorData?.error || 'Anket yüklenemedi');
-      if (errorData?.alreadySubmitted) {
-        setAlreadySubmitted(true);
-      }
     } finally {
       setLoading(false);
     }
@@ -98,20 +94,9 @@ const SurveyForm = () => {
               className="h-16 w-auto mx-auto mb-4"
             />
           )}
-          {alreadySubmitted ? (
-            <>
-              <div className="text-6xl mb-4">✅</div>
-              <h2 className="text-2xl font-semibold text-primary mb-2">Teşekkür Ederiz!</h2>
-              <p className="text-gray-600 mb-4">{error}</p>
-              <p className="text-sm text-gray-500">Görüşleriniz bizim için çok değerli.</p>
-            </>
-          ) : (
-            <>
-              <div className="text-6xl mb-4">⚠️</div>
-              <p className="text-red-600 mb-2">{error}</p>
-              <p className="text-sm text-gray-500">Lütfen geçerli bir anket linki kullanın.</p>
-            </>
-          )}
+          <div className="text-6xl mb-4">⚠️</div>
+          <p className="text-red-600 mb-2">{error}</p>
+          <p className="text-sm text-gray-500">Lütfen geçerli bir anket linki kullanın.</p>
         </div>
       </div>
     );

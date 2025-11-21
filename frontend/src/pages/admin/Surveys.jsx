@@ -83,6 +83,20 @@ const Surveys = () => {
     }
   };
 
+  const handleDelete = async (survey) => {
+    if (!confirm(`"${survey.name}" anketini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!`)) {
+      return;
+    }
+    
+    try {
+      await axios.delete(`/api/surveys/${survey.id}`);
+      alert('Anket silindi!');
+      loadSurveys();
+    } catch (error) {
+      alert('Silme başarısız: ' + (error.response?.data?.error || error.message));
+    }
+  };
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     alert('Link kopyalandı!');
@@ -156,6 +170,12 @@ const Surveys = () => {
                     className="btn-secondary text-sm py-2 px-4"
                   >
                     {survey.is_active ? '⏸️ Pasifleştir' : '▶️ Aktifleştir'}
+                  </button>
+                  <button
+                    onClick={() => handleDelete(survey)}
+                    className="bg-red-600 hover:bg-red-700 text-white text-sm py-2 px-4 rounded-button transition-colors"
+                  >
+                    🗑️ Sil
                   </button>
                 </div>
               </div>
