@@ -181,3 +181,8 @@ Sorun yaşarsanız:
 ## 🎉 Teşekkürler
 
 TUSA Hospital ekibine güvenleri için teşekkürler!
+
+
+---
+**Son Güncelleme:** 21 Kasım 2024 - Otomatik deployment aktif! 🚀
+
